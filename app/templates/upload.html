@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card center-card">
+    <h2>Upload Your Resume</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="resume">Select Resume (PDF):</label><br>
+            <input type="file" name="resume" accept=".pdf" required style="margin-top: 10px;">
+        </div>
+        <br>
+        <button type="submit" class="btn">Upload</button>
+    </form>
+</div>
+{% endblock %}

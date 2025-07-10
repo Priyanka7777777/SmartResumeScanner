@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Job Descriptions</h2>
+<a href="{{ url_for('admin.add_job') }}">Add New Job</a>
+<ul>
+  {% for job in jobs %}
+    <li><strong>{{ job.title }}</strong>: {{ job.description }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
+

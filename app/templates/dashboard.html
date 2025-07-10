@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+    <aside class="sidebar">
+        <h2>🧠 Smart Scanner</h2>
+        <ul>
+            <li><a href="{{ url_for('auth.dashboard') }}">🏠 Dashboard</a></li>
+            <li><a href="{{ url_for('resume.upload_resume') }}">📄 Upload Resume</a></li>
+            {% if current_user.email == "admin@example.com" %}
+            <li><a href="{{ url_for('admin.list_jobs') }}">🛠 Admin Panel</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('auth.logout') }}">🚪 Logout</a></li>
+        </ul>
+        <button id="toggle-dark" class="toggle-btn">🌙 Toggle Dark Mode</button>
+    </aside>
+
+    <main class="main-content">
+        <h1>Welcome, {{ name }} 👋</h1>
+        <p>This is your personalized dashboard. Upload your resume to get started with skill analysis and job suggestions.</p>
+        
+        <div class="card">
+            <h3>Resume Scanner</h3>
+            <p>Click below to upload your resume</p>
+            <a href="{{ url_for('resume.upload_resume') }}" class="btn">Upload Resume</a>
+        </div>
+    </main>
+</div>
+{% endblock %}
