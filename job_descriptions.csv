@@ -1,0 +1,7 @@
+job_id,job_title,description
+1,Data Scientist,"Python, Machine Learning, Data Analysis, Pandas, Numpy"
+2,Web Developer,"HTML, CSS, JavaScript, Flask, React"
+3,Cloud Engineer,"AWS, Terraform, CI/CD, Docker, Kubernetes"
+4,AI Researcher,"Deep Learning, NLP, Python, PyTorch, TensorFlow"
+5,DevOps Engineer,"Jenkins, Prometheus, Grafana, Docker, Kubernetes"
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="center-wrapper">
+  <div class="card">
+    <h2>Login</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+
+      <label for="email">Email</label>
+      {{ form.email(size=32) }}
+
+      <label for="password">Password</label>
+      {{ form.password(size=32) }}
+
+      <button type="submit" class="btn">Login</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px;">
+      Don't have an account? <a href="{{ url_for('auth.register') }}">Register</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

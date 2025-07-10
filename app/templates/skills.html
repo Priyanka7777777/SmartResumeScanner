@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="recommendation-container">
+    <h2>Hi {{ name }}, Here are your Recommended Jobs</h2>
+    <ul class="skills-list">
+        {% for skill in skills %}
+            <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('resume.upload_resume') }}" class="btn btn-secondary">Upload Another Resume</a>
+</div>
+{% endblock %}
