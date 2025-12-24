@@ -1,0 +1,30 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Flask
+instance/
+*.db
+
+# Uploads & data
+uploads/
+data/
+job_descriptions.csv
+
+# Environment
+.env
+
+# Docker
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
