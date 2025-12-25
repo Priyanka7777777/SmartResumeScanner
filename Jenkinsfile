@@ -4,17 +4,25 @@ pipeline {
     environment {
         DOCKERHUB_USERNAME = "priyanka7777777"
         IMAGE_NAME = "smartresumescanner"
-        IMAGE_TAG = "latest"
         CONTAINER_NAME = "smartresumescanner-app"
         HOST_PORT = "5001"
         CONTAINER_PORT = "5000"
     }
 
     stages {
+
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/Priyanka7777777/SmartResumeScanner.git'
+            }
+        }
+
+        stage('Set Image Tag') {
+            steps {
+                script {
+                    env.IMAGE_TAG = env.GIT_COMMIT.take(7)
+                }
             }
         }
 
@@ -33,23 +41,24 @@ pipeline {
                 '''
             }
         }
-stage('Deploy to Kubernetes (CD)') {
-    steps {
-        sh '''
-            echo "Deploying to Kubernetes..."
 
-            kubectl set image deployment/smartresumescanner-deployment \
-              smartresumescanner=priyanka7777777/smartresumescanner:latest
+        stage('Deploy to Kubernetes (CD)') {
+            steps {
+                sh '''
+                    echo "Deploying to Kubernetes..."
 
-            kubectl rollout status deployment/smartresumescanner-deployment
-        '''
+                    kubectl set image deployment/smartresumescanner-deployment \
+                      smartresumescanner=$DOCKERHUB_USERNAME/$IMAGE_NAME:$IMAGE_TAG
+
+                    kubectl rollout status deployment/smartresumescanner-deployment
+                '''
+            }
+        }
     }
-}
-    
-}
+
     post {
         success {
-            echo "✅ Application deployed successfully on port ${HOST_PORT}"
+            echo "✅ Application deployed successfully"
         }
         failure {
             echo "❌ Deployment failed"
