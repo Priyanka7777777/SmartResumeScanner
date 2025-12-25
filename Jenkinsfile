@@ -34,22 +34,22 @@ pipeline {
             }
         }
 
-        stage('Deploy Application (CD)') {
-            steps {
-                sh '''
-                  echo "Stopping old container if exists..."
-                  docker stop $CONTAINER_NAME || true
-                  docker rm $CONTAINER_NAME || true
+       stage('Deploy Application (CD)') {
+    steps {
+        sh '''
+          echo "Stopping any container using port 5001..."
+          docker ps -q --filter "publish=5001" | xargs -r docker stop
+          docker ps -aq --filter "publish=5001" | xargs -r docker rm
 
-                  echo "Starting new container..."
-                  docker run -d \
-                    --name $CONTAINER_NAME \
-                    -p $HOST_PORT:$CONTAINER_PORT \
-                    $DOCKERHUB_USERNAME/$IMAGE_NAME:$IMAGE_TAG
-                '''
-            }
-        }
+          echo "Starting new container..."
+          docker run -d \
+            --name smartresumescanner-app \
+            -p 5001:5000 \
+            priyanka7777777/smartresumescanner:latest
+        '''
     }
+}
+
 
     post {
         success {
