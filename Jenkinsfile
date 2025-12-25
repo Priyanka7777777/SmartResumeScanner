@@ -45,7 +45,7 @@ stage('Deploy to Kubernetes (CD)') {
         '''
     }
 }
-    }
+    
 }
     post {
         success {
