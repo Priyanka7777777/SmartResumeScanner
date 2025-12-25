@@ -48,9 +48,9 @@ pipeline {
             priyanka7777777/smartresumescanner:latest
         '''
     }
-}
 
-
+       }
+    }
     post {
         success {
             echo "✅ Application deployed successfully on port ${HOST_PORT}"
