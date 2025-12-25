@@ -33,23 +33,26 @@ pipeline {
                 '''
             }
         }
-
-       stage('Deploy Application (CD)') {
+stage('Deploy Application (CD)') {
     steps {
         sh '''
-          echo "Stopping any container using port 5001..."
-          docker ps -q --filter "publish=5001" | xargs -r docker stop
-          docker ps -aq --filter "publish=5001" | xargs -r docker rm
+            echo "Stopping container by name if exists..."
+            docker stop smartresumescanner-app || true
+            docker rm smartresumescanner-app || true
 
-          echo "Starting new container..."
-          docker run -d \
-            --name smartresumescanner-app \
-            -p 5001:5000 \
-            priyanka7777777/smartresumescanner:latest
+            echo "Stopping any container using port 5001..."
+            docker ps -q --filter "publish=5001" | xargs -r docker stop
+            docker ps -aq --filter "publish=5001" | xargs -r docker rm
+
+            echo "Starting new container..."
+            docker run -d \
+              --name smartresumescanner-app \
+              -p 5001:5000 \
+              priyanka7777777/smartresumescanner:latest
         '''
     }
+}
 
-       }
     }
     post {
         success {
