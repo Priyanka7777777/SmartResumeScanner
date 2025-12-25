@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartresumescanner-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smartresumescanner
+  template:
+    metadata:
+      labels:
+        app: smartresumescanner
+    spec:
+      containers:
+      - name: smartresumescanner
+        image: priyanka7777777/smartresumescanner:latest
+        ports:
+        - containerPort: 5000
